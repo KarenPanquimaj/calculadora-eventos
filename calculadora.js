@@ -1,5 +1,3 @@
-
-
 const uno = document.querySelector('#uno')
 const dos = document.querySelector('#dos')
 const tres = document.querySelector('#tres')
@@ -12,69 +10,102 @@ const siete = document.querySelector('#siete')
 const ocho = document.querySelector('#ocho')
 const nueve = document.querySelector('#nueve')
 const suma = document.querySelector('#suma')
-const divison = document.querySelector('#divison')
+const division = document.querySelector('#division')
 const cero = document.querySelector('#cero')
-const multiplidor = document.querySelector('#multiplidor')
-
+const multi = document.querySelector('#multi')
+const igual = document.querySelector('#igual')
+let numero = '0' //primer numero aguardado
+let numeroDos = '0' // segundo numero aguardado
+let operador = ''
+let resultado = '0'
+let acumulador = '0'
 
 const calcular = document.querySelector('#calcular')
 
 uno.addEventListener('click', () => {
-    calcular.value = '1'
+    calcular.value += '1'
+    
 })
 
-
 dos.addEventListener('click', () => {
-    calcular.value = '2'
+    calcular.value += '2'
 })
 
 tres.addEventListener('click', () => {
-    calcular.value = '3'
+    calcular.value += '3'
 })
 
 cuatro.addEventListener('click', () => {
-    calcular.value = '4'
+    calcular.value += '4'
 })
 
 cinco.addEventListener('click', () => {
-    calcular.value = '5'
+    calcular.value += '5'
 })
 
 seis.addEventListener('click', () => {
-    calcular.value = '6'
+    calcular.value += '6'
 })
 
 siete.addEventListener('click', () => {
-    calcular.value = '7'
+    calcular.value += '7'
 })
 
 ocho.addEventListener('click', () => {
-    calcular.value = '8'
+    calcular.value += '8'
 })
 
 nueve.addEventListener('click', () => {
-    calcular.value = '9'
+    calcular.value += '9'
 })
 
 cero.addEventListener('click', () => {
-    calcular.value = '0'
+    calcular.value += '0'
 })
 
 menos.addEventListener('click', () => {
-    calcular.value = '-'
+    numero = calcular.value
+    calcular.value = ''
+    operador = '-'
 })
 
 suma.addEventListener('click', () => {
-    calcular.value = '+'
+    numero = calcular.value
+    calcular.value = ''
+    operador = '+'
 })
 
-divison.addEventListener('click', () => {
-    calcular.value = '÷'
+division.addEventListener('click', () => {
+    numero = calcular.value
+    calcular.value = ''
+    operador = '/'
 })
 
 
-multiplidor.addEventListener('click', () => {
-    calcular.value = '*'
+multi.addEventListener('click', () => {
+    numero = calcular.value
+    calcular.value = ''
+    operador = '*'
 })
 
+igual.addEventListener('click', () =>{
+     numeroDos = calcular.value
+    if(operador == '+')
+    {
+        resultado = parseInt(numero) + parseInt(numeroDos)
+        calcular.value = resultado
+    }else if(operador == '*'){
+        resultado = parseInt(numero) * parseInt(numeroDos)
+        calcular.value = resultado
+    }else if(operador == '/'){
+        resultado = parseInt(numero) / parseInt(numeroDos)
+        calcular.value = resultado
+    }else if(operador == '-'){
+        resultado = parseInt(numero) - parseInt(numeroDos)
+        calcular.value = resultado
+    }
+})
 
+clear.addEventListener('click', () => {
+    calcular.value = ''
+})
