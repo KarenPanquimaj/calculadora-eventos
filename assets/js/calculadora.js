@@ -17,8 +17,6 @@ const igual = document.querySelector('#igual')
 let numero = '0' //primer numero aguardado
 let numeroDos = '0' // segundo numero aguardado
 let operador = ''
-let resultado = '0'
-let acumulador = '0'
 
 const calcular = document.querySelector('#calcular')
 
@@ -90,6 +88,7 @@ multi.addEventListener('click', () => {
 
 igual.addEventListener('click', () =>{
      numeroDos = calcular.value
+     numeroTres = calcular.value
     if(operador == '+')
     {
         resultado = parseInt(numero) + parseInt(numeroDos)
