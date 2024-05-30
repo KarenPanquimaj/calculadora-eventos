@@ -14,8 +14,8 @@ const division = document.querySelector('#division')
 const cero = document.querySelector('#cero')
 const multi = document.querySelector('#multi')
 const igual = document.querySelector('#igual')
-let numero = '0' //primer numero aguardado
-let numeroDos = '0' // segundo numero aguardado
+let numero = '0'
+let numeroDos = '0'
 let operador = ''
 
 const calcular = document.querySelector('#calcular')
@@ -88,7 +88,6 @@ multi.addEventListener('click', () => {
 
 igual.addEventListener('click', () =>{
      numeroDos = calcular.value
-     numeroTres = calcular.value
     if(operador == '+')
     {
         resultado = parseInt(numero) + parseInt(numeroDos)
