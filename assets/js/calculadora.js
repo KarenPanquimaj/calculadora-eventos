@@ -1,109 +1,95 @@
-const uno = document.querySelector('#uno')
-const dos = document.querySelector('#dos')
-const tres = document.querySelector('#tres')
-const clear = document.querySelector('#clear')
-const cuatro = document.querySelector('#cuatro')
-const cinco = document.querySelector('#cinco')
-const seis = document.querySelector('#seis')
-const menos = document.querySelector('#menos')
-const siete = document.querySelector('#siete')
-const ocho = document.querySelector('#ocho')
-const nueve = document.querySelector('#nueve')
-const suma = document.querySelector('#suma')
-const division = document.querySelector('#division')
-const cero = document.querySelector('#cero')
-const multi = document.querySelector('#multi')
-const igual = document.querySelector('#igual')
-let numero = '0'
-let numeroDos = '0'
-let operador = ''
+let numeros = document.querySelectorAll('.numero')
+let texto = document.querySelector('#texto')
+let btnAccion = document.querySelectorAll('.accion')
+const Limpiar = document.querySelector('.clear')
+let primerNumero = 0;
+let segundoNumero = 0;
+let signo = ''
+let acumulador = 0
+let acumuladorM = 1
+let primeraVez = true;
+let aguardadoM = ''
 
-const calcular = document.querySelector('#calcular')
-
-uno.addEventListener('click', () => {
-    calcular.value += '1'
-    
+numeros.forEach((btn) =>{
+    btn.addEventListener('click', () =>{
+        texto.value += btn.value
+    })
 })
 
-dos.addEventListener('click', () => {
-    calcular.value += '2'
+btnAccion.forEach((btn) => {
+    btn.addEventListener('click', (e) =>{
+        console.log(e)
+        if(e.target.value == '+' || e.target.value == '-'
+        || e.target.value == '/' || e.target.value == '*')
+        {
+            primerNumero = parseInt(texto.value)
+            switch(e.target.value)
+            {
+                case '+':
+                    acumulador = acumulador + primerNumero
+                break;
+                case '-':
+                if(primeraVez)
+                {
+                    acumulador = primerNumero + Math.abs(acumulador)
+                    primeraVez = false;
+                }else if(acumulador >= 0)
+                {
+                    // console.log(acumulador, primerNumero)
+                    acumulador = Math.abs(acumulador) - primerNumero
+                }else{
+                    // console.log(acumulador, primerNumero)
+                    acumulador = acumulador - primerNumero
+                }
+                break;
+                case '*':
+                    acumuladorM = acumuladorM * primerNumero
+                break;
+                case '/':
+                    if(primeraVez)
+                    {
+                        acumulador = primerNumero + acumulador
+                        primeraVez = false;
+                    }else{
+                        acumulador = acumulador / primerNumero
+                    }
+                 
+            }
+            texto.value = ''
+            signo = e.target.value
+
+        }else if(e.target.value == '='){
+            if(signo == '+'){
+                segundoNumero = parseInt(texto.value)
+                let resultado= acumulador + segundoNumero
+                texto.value = resultado
+            }
+            else if(signo == '-')
+            {
+                segundoNumero = parseInt(texto.value)
+                let resultado = acumulador - segundoNumero
+                texto.value = resultado
+            }
+            else if(signo == '*')
+            {
+                segundoNumero = parseInt(texto.value)
+                let resultado = acumuladorM * segundoNumero
+                texto.value = resultado
+            }
+            else if(signo == '/')
+            {
+                segundoNumero = parseInt(texto.value)
+                let resultado = acumulador / segundoNumero
+                texto.value = resultado
+                primeraVez = true
+            }
+            acumulador = 0
+            acumuladorM = 1
+        }
+})
 })
 
-tres.addEventListener('click', () => {
-    calcular.value += '3'
-})
+Limpiar.addEventListener('click', () => {
+    texto.value = ''
 
-cuatro.addEventListener('click', () => {
-    calcular.value += '4'
-})
-
-cinco.addEventListener('click', () => {
-    calcular.value += '5'
-})
-
-seis.addEventListener('click', () => {
-    calcular.value += '6'
-})
-
-siete.addEventListener('click', () => {
-    calcular.value += '7'
-})
-
-ocho.addEventListener('click', () => {
-    calcular.value += '8'
-})
-
-nueve.addEventListener('click', () => {
-    calcular.value += '9'
-})
-
-cero.addEventListener('click', () => {
-    calcular.value += '0'
-})
-
-menos.addEventListener('click', () => {
-    numero = calcular.value
-    calcular.value = ''
-    operador = '-'
-})
-
-suma.addEventListener('click', () => {
-    numero = calcular.value
-    calcular.value = ''
-    operador = '+'
-})
-
-division.addEventListener('click', () => {
-    numero = calcular.value
-    calcular.value = ''
-    operador = '/'
-})
-
-
-multi.addEventListener('click', () => {
-    numero = calcular.value
-    calcular.value = ''
-    operador = '*'
-})
-
-igual.addEventListener('click', () =>{
-     numeroDos = calcular.value
-    if(operador == '+')
-    {
-        resultado = parseInt(numero) + parseInt(numeroDos)
-        calcular.value = resultado
-    }else if(operador == '*'){
-        resultado = parseInt(numero) * parseInt(numeroDos)
-        calcular.value = resultado
-    }else if(operador == '/'){
-        resultado = parseInt(numero) / parseInt(numeroDos)
-        calcular.value = resultado
-    }else if(operador == '-'){
-        resultado = parseInt(numero) - parseInt(numeroDos)
-        calcular.value = resultado
-    }
-})
-
-clear.addEventListener('click', () => {
-    calcular.value = ''
 })
