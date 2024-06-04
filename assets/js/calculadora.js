@@ -145,19 +145,3 @@ Limpiar.addEventListener('click', () => {
     primeraVez = true;
     texto.value = ''
 })
-
-
-
-
-
-
-// segundoNumero = parseInt(texto.value)
-// acumulador = acumulador * segundoNumero
-// if(acumulador == 0)
-// {
-//     segundoNumero = 0
-//     acumulador = parseInt(texto.value)
-// }else{
-//     acumulador = acumulador * segundoNumero
-//     texto.value = acumulador
-// }
