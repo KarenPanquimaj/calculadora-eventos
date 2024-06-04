@@ -5,10 +5,10 @@ const Limpiar = document.querySelector('.clear')
 let primerNumero = 0;
 let segundoNumero = 0;
 let signo = ''
-let acumulador = 0
-let acumuladorM = 1
+let acumulador = 0;
 let primeraVez = true;
-let aguardadoM = ''
+
+
 
 numeros.forEach((btn) =>{
     btn.addEventListener('click', () =>{
@@ -16,80 +16,148 @@ numeros.forEach((btn) =>{
     })
 })
 
+const suma = () => {
+    acumulador = acumulador + primerNumero
+}
+
+const resta = () =>{
+    if(primeraVez)
+    {
+        acumulador = primerNumero - Math.abs(acumulador)
+        primeraVez = false;
+    }else if(acumulador >= 0)
+    {
+        acumulador = Math.abs(acumulador) - primerNumero
+    }else{
+        acumulador = acumulador - primerNumero
+    }
+}
+
+const multiplicacion = () =>{
+    if(acumulador == 0)
+    {
+        acumulador = 1
+        acumulador = acumulador * primerNumero
+    }else{
+        acumulador = acumulador * primerNumero
+    }
+}
+
+
+const divicion = () =>{
+    if(acumulador == 0)
+    {
+        acumulador = primerNumero
+    }else{
+        acumulador = acumulador / primerNumero
+    }
+}
+
+const igual = () =>{
+    if(signo == '+'){
+        segundoNumero = parseInt(texto.value)
+        acumulador = acumulador + segundoNumero
+        texto.value = acumulador
+    }
+    else if(signo == '-')
+    {
+        segundoNumero = parseInt(texto.value)
+        acumulador = acumulador - segundoNumero
+        primeraVez = true
+        texto.value = acumulador
+    }
+    else if(signo == '*')
+    {
+        segundoNumero = parseInt(texto.value)
+        acumulador = acumulador * segundoNumero
+        primeraVez = true
+        texto.value = acumulador
+        signo = ''
+    }
+    else if(signo == '/')
+    {
+        segundoNumero = parseInt(texto.value)
+        acumulador = acumulador / segundoNumero
+        texto.value = acumulador
+    }
+}
+
 btnAccion.forEach((btn) => {
     btn.addEventListener('click', (e) =>{
-        console.log(e)
-        if(e.target.value == '+' || e.target.value == '-'
-        || e.target.value == '/' || e.target.value == '*')
+        if(texto.value == '')
+        {
+            alert("Ingrese un numero")
+        }
+        else if(e.target.value != '=')
         {
             primerNumero = parseInt(texto.value)
             switch(e.target.value)
             {
                 case '+':
-                    acumulador = acumulador + primerNumero
+                    if(signo != '')
+                    {
+                        igual();
+                    }else{
+                        suma();
+                    }
                 break;
                 case '-':
-                if(primeraVez)
-                {
-                    acumulador = primerNumero + Math.abs(acumulador)
-                    primeraVez = false;
-                }else if(acumulador >= 0)
-                {
-                    // console.log(acumulador, primerNumero)
-                    acumulador = Math.abs(acumulador) - primerNumero
-                }else{
-                    // console.log(acumulador, primerNumero)
-                    acumulador = acumulador - primerNumero
-                }
+                    if(signo != '')
+                    {
+                        igual();
+                    }else{
+                        resta();
+                    }
                 break;
                 case '*':
-                    acumuladorM = acumuladorM * primerNumero
+                    if(signo != '')
+                    {
+                        igual();
+                    }else{
+                        multiplicacion();
+                    }
                 break;
                 case '/':
-                    if(primeraVez)
+                    if(signo != '')
                     {
-                        acumulador = primerNumero + acumulador
-                        primeraVez = false;
+                        igual();
                     }else{
-                        acumulador = acumulador / primerNumero
+                        divicion();
                     }
                  
             }
             texto.value = ''
             signo = e.target.value
 
-        }else if(e.target.value == '='){
-            if(signo == '+'){
-                segundoNumero = parseInt(texto.value)
-                let resultado= acumulador + segundoNumero
-                texto.value = resultado
-            }
-            else if(signo == '-')
-            {
-                segundoNumero = parseInt(texto.value)
-                let resultado = acumulador - segundoNumero
-                texto.value = resultado
-            }
-            else if(signo == '*')
-            {
-                segundoNumero = parseInt(texto.value)
-                let resultado = acumuladorM * segundoNumero
-                texto.value = resultado
-            }
-            else if(signo == '/')
-            {
-                segundoNumero = parseInt(texto.value)
-                let resultado = acumulador / segundoNumero
-                texto.value = resultado
-                primeraVez = true
-            }
-            acumulador = 0
-            acumuladorM = 1
         }
-})
+        else{
+            igual()
+            acumulador = 0
+        }
+})      
 })
 
 Limpiar.addEventListener('click', () => {
+    acumulador = 0;
+    primerNumero = 0;
+    segundoNumero = 0;
+    signo = ''
+    primeraVez = true;
     texto.value = ''
-
 })
+
+
+
+
+
+
+// segundoNumero = parseInt(texto.value)
+// acumulador = acumulador * segundoNumero
+// if(acumulador == 0)
+// {
+//     segundoNumero = 0
+//     acumulador = parseInt(texto.value)
+// }else{
+//     acumulador = acumulador * segundoNumero
+//     texto.value = acumulador
+// }
