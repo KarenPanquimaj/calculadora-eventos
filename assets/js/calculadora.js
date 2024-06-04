@@ -72,7 +72,7 @@ const igual = () =>{
         acumulador = acumulador * segundoNumero
         primeraVez = true
         texto.value = acumulador
-        signo = ''
+        
     }
     else if(signo == '/')
     {
@@ -80,7 +80,9 @@ const igual = () =>{
         acumulador = acumulador / segundoNumero
         texto.value = acumulador
     }
+    signo = ''
 }
+
 
 btnAccion.forEach((btn) => {
     btn.addEventListener('click', (e) =>{
